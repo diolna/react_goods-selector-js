@@ -36,35 +36,37 @@ export const App = () => {
 
       <table className="table">
         <tbody>
-          {goods.map(good => (
-            <tr
-              data-cy="Good"
-              className={`${selectedGoods.includes(good) ? 'has-background-success-light' : ''}`}
-              key={good}
-            >
-              <td>
-                <button
-                  data-cy={
-                    selectedGoods.includes(good) ? 'RemoveButton' : 'AddButton'
-                  }
-                  type="button"
-                  className={`button${selectedGoods.includes(good) ? ' is-info' : ''}`}
-                  onClick={() => {
-                    if (selectedGoods.includes(good)) {
-                      setSelectedGoods('No goods selected');
-                    } else {
-                      setSelectedGoods(good);
-                    }
-                  }}
-                >
-                  {selectedGoods.includes(good) ? '-' : '+'}
-                </button>
-              </td>
-              <td data-cy="GoodTitle" className="is-vcentered">
-                {good}
-              </td>
-            </tr>
-          ))}
+          {goods.map(good => {
+            const isSelected = selectedGoods === good;
+
+            return (
+              <tr
+                data-cy="Good"
+                className={`${isSelected ? 'has-background-success-light' : ''}`}
+                key={good}
+              >
+                <td>
+                  <button
+                    data-cy={isSelected ? 'RemoveButton' : 'AddButton'}
+                    type="button"
+                    className={`button${isSelected ? ' is-info' : ''}`}
+                    onClick={() => {
+                      if (isSelected) {
+                        setSelectedGoods('No goods selected');
+                      } else {
+                        setSelectedGoods(good);
+                      }
+                    }}
+                  >
+                    {isSelected ? '-' : '+'}
+                  </button>
+                </td>
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {good}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </main>
