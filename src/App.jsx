@@ -17,7 +17,6 @@ export const goods = [
 
 export const App = () => {
   const [selectedGoods, setSelectedGoods] = useState('Jam');
-  const [nameButton, setNameButton] = useState('-');
 
   return (
     <main className="section container">
@@ -51,16 +50,14 @@ export const App = () => {
                   type="button"
                   className={`button${selectedGoods.includes(good) ? ' is-info' : ''}`}
                   onClick={() => {
-                    setSelectedGoods(good);
-                    if (selectedGoods.includes(good) && nameButton === '-') {
-                      setNameButton('+');
+                    if (selectedGoods.includes(good)) {
                       setSelectedGoods('No goods selected');
                     } else {
-                      setNameButton('-');
+                      setSelectedGoods(good);
                     }
                   }}
                 >
-                  {selectedGoods.includes(good) ? `${nameButton}` : '+'}
+                  {selectedGoods.includes(good) ? '-' : '+'}
                 </button>
               </td>
               <td data-cy="GoodTitle" className="is-vcentered">
